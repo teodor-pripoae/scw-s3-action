@@ -5,6 +5,7 @@ set -euo pipefail
 : "${SCW_ACCESS_KEY?SCW_ACCESS_KEY environment variable must be set}"
 : "${SCW_SECRET_KEY?SCW_SECRET_KEY environment variable must be set}"
 : "${SCW_REGION?SCW_REGION environment variable must be set}"
+: "${SCW_BUCKET?SCW_BUCKET environment variable must be set}"
 
 
 mkdir -p ~/.aws
@@ -18,10 +19,10 @@ endpoint = awscli_plugin_endpoint
 [default]
 region = ${SCW_REGION}
 s3 =
-  endpoint_url = https://s3.${SCW_REGION}.scw.cloud
+  endpoint_url = https://${SCW_BUCKET}.s3.${SCW_REGION}.scw.cloud
   signature_version = s3v4
 s3api =
-  endpoint_url = https://s3.${SCW_REGION}.scw.cloud
+  endpoint_url = https://${SCW_BUCKET}.s3.${SCW_REGION}.scw.cloud
 " > ~/.aws/config
 
 touch ~/.aws/credentials
